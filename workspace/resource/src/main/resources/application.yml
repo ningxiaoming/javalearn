@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: resource
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    Url: jdbc:mysql://192.168.60.79:3306/oauth2_resouree?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+
+    username: wxyj
+    password: 123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:7001/oauth/token
+      user-authorization-uri: http://localhost:7001/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:7001/oauth/check_token
+
+
+
+
+
+server:
+  port: 7002
+  servlet:
+    context-path: /contents
+
+mybatis-plus:
+  # xml地址
+  mapper-locations: classpath*:mapper/*/*Mapper.xml
+  # 实体扫描，多个package用逗号或者分号分隔 #自己的实体类地址
+  type-aliases-package: com.vision.resource.entity
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #开启驼峰命名法
+    map-underscore-to-camel-case: true
+
